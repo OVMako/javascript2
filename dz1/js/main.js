@@ -5,7 +5,7 @@ const products = [
     {id: 4, title: 'Gamepad', price: 50, img: 'https://placehold.it/200x150'},
 ];
 
-const renderProduct = (title, price) =>
+const renderProduct = (title = 'Notebook', price = 2000) =>
      `<div class="product-item">
         <img src="https://placehold.it/200x150" alt="${title}">
         <h3>${title}</h3>
