@@ -23,6 +23,7 @@ class ProductsList{
         }
     }
 
+    // Добавление для GoodsList метод, определяющий суммарную стоимость всех товаров.
     total (good) {
         let s = 0;
         let totalPrice = document.createElement('div');
