@@ -36,14 +36,15 @@ class ProductsList {
     // }
 
     // 1. Переделайте makeGETRequest() так, чтобы она использовала промисы.
-    let getRequest = () => {
+    
+    /*let getRequest = () => {
         fetch(url)
             .then(result => result.json())
             .then(data => {})
             .catch( =>{
                 console.log('Error')
             })
-    }
+    }*/
 
     _getProducts(){ 
         return fetch(`${API}/catalogData.json`)
@@ -87,6 +88,102 @@ class ProductItem {
 }
 
 let list = new ProductsList();
+
+class Cart {
+    constructor(container = '.cart-block'){
+        this.container = container;
+        this.item = [];
+        this.sum = 0;
+        this.quantity = 0;
+    };
+    
+    init() {
+        document.querySelector('#toggle-cart').addEventListener ('click', () => {
+            cart.shown = !cart.shown
+            cart.render ()
+            document.querySelector('.cart-block').classList.toggle('invisible')
+        })
+
+        document.querySelector(this.container).addEventListener ('click', evt => {
+            if (evt.target.name === 'del-btn') {
+                this.removeProduct(evt.target.dataset.id)
+            }
+        })
+    }
+
+    render () {
+        let container = document.querySelector (this.itemsContainer)
+        let domString = ''
+
+        this.items.forEach (item => {
+            domString += item.createTemplate ()
+        })
+        container.innerHTML = domString
+
+        document.querySelector ('#tot-sum').innerHTML = this.sum
+        document.querySelector ('#tot-qua').innerHTML = this.qua
+        
+    }
+    addProduct (product) {
+        let find = this.items.find (item => item.id_product === product.id) 
+        if  (!find) {
+            this.items.push (createCartItem (product.id, product.name, product.price)) //потому-что дата-сет
+        } else {
+            find.quantity++
+        }
+        this.checkTotal ()
+        this.render ()
+    }
+    removeProduct (id) {
+        let find = this.items.find (item => item.id_product === id) 
+        if  (find.quantity === 1) {
+            this.items.splice(this.items.indexOf(find), 1)
+        } else {
+            find.quantity--
+        }
+        this.checkTotal ()
+        this.render ()
+    }
+    checkTotal () {
+        let s = 0
+        let q = 0
+
+        this.items.forEach (item => {
+            q += item.quantity
+            s += item.quantity * item.price
+        })
+
+        this.sum = s
+        this.qua = q
+    }
+}
+
+
+class CartItem {
+    constructor(product, img = 'https://placehold.it/40x30'){
+        this.title = product.title;
+        this.price = product.price;
+        this.id = product.id;
+        this.img = img;
+    }
+    createTemplate () {
+        return `
+        <div class="cart-item" data-id="${this.id_product}">
+            <img src="${this.img}" alt="${this.product_name}" width="100" height="80">
+            <div class="product-desc">
+                <p class="product-title">${this.product_name}</p>
+                <p class="product-quantity">${this.quantity}</p>
+                <p class="product-single-price">${this.price}</p>
+            </div>
+            <div class="right-block">
+                <p class="product-price">$${this.price * this.quantity}</p>
+                <button name="del-btn" class="del-btn" data-id="${this.id_product}">&times;</button>
+            </div>
+        </div>
+        `
+    }
+
+
 // console.log(list.calcSum());
 
 
@@ -120,4 +217,3 @@ let list = new ProductsList();
 // };
 //
 // renderPage(products);
-
