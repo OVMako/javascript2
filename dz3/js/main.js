@@ -16,18 +16,6 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 //     xhr.send();
 // };
 
-// 1. Переделайте makeGETRequest() так, чтобы она использовала промисы.
-let getRequest = () => {
-    fetch(url)
-            .then(result => result.json())
-            .then(data => {})
-            .catch( =>{
-                console.log('Error')
-            })
-}
-
-
-//
 class ProductsList {
     constructor(container = '.products'){
         this.container = container;
@@ -46,6 +34,17 @@ class ProductsList {
     //         cb();
     //     })
     // }
+
+    // 1. Переделайте makeGETRequest() так, чтобы она использовала промисы.
+    let getRequest = () => {
+        fetch(url)
+            .then(result => result.json())
+            .then(data => {})
+            .catch( =>{
+                console.log('Error')
+            })
+    }
+
     _getProducts(){ 
         return fetch(`${API}/catalogData.json`)
             .then(result => result.json())
