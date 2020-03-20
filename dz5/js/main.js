@@ -27,21 +27,33 @@ const app = new Vue({
         
     },
     
-    // addToCart(state, item) {
-    //     let found = state.cart.find(product => product.id == item.id);
+    addToCart(state, item) {
+        let found = state.cart.find(product => product.id == item.id);
     
-    //     if (found) {
-    //         found.quantity ++;
-    //         found.totalPrice = found.quantity * found.price;
-    //     } else {
-    //         state.cart.push(item);
+        if (found) {
+            found.quantity ++;
+            found.totalPrice = found.quantity * found.price;
+        } else {
+            state.cart.push(item);
     
-    //         Vue.set(item, 'quantity', 1);
-    //         Vue.set(item, 'totalPrice', item.price);
-    //     }
+            Vue.set(item, 'quantity', 1);
+            Vue.set(item, 'totalPrice', item.price);
+        }
     
-    //     state.cartCount++;
-    // },
+        state.cartCount++;
+    },
+    removeFromCart(item) {
+        this.$store.commit('removeFromCart', item);
+        let index = state.cart.indexOf(item);
+
+    if (index > -1) {
+        let product = state.cart[index];
+        state.cartCount -= product.quantity;
+
+        state.cart.splice(index, 1);
+    }
+
+    },
         mounted(){
             this.getJson(`${API + this.catalogUrl}`)
                 .then(data => {
@@ -64,6 +76,15 @@ const app = new Vue({
 
             return filtered
         }
+    },
+    totalPrice() {
+        let total = 0;
+
+        for (let item of this.$store.state.cart) {
+            total += item.totalPrice;
+        }
+
+        return total.toFixed(2);
     }
 })
 

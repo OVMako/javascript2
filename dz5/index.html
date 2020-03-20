@@ -20,9 +20,9 @@
             <button class="btn-cart" type="button" @click="show =! show">Корзина</button>
             <div v-if="show" class="cart-block visible">
                 <div class="wrp">Нет данных</div>
-                <!--<p>Корзина ({{ $store.state.cartCount }})</p>
+                <p>Корзина ({{ $store.state.cartCount }})</p>
                 <p>{{ item.title }} x{{ item.quantity }} - ${{ item.totalPrice }}</p>
-                <p>Итого: ${{ totalPrice }}</p>-->
+                <p>Итого: ${{ totalPrice }}</p>
             </div>
             <div v-else class="cart-block invisible"></div>
             
