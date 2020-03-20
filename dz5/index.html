@@ -13,12 +13,19 @@
         <div class="cart">
             <form action="#" class="search-form">
                 <input type="text" class="search-field" v-model='search'>
-                <button class="btn-search" type="submit">
+                <button class="btn-search" type="submit" @click="search">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
-            <button class="btn-cart" type="button">Корзина</button>
-            <div class="cart-block invisible"></div>
+            <button class="btn-cart" type="button" @click="show =! show">Корзина</button>
+            <div v-if="show" class="cart-block visible">
+                <div class="wrp">Нет данных</div>
+                <!--<p>Корзина ({{ $store.state.cartCount }})</p>
+                <p>{{ item.title }} x{{ item.quantity }} - ${{ item.totalPrice }}</p>
+                <p>Итого: ${{ totalPrice }}</p>-->
+            </div>
+            <div v-else class="cart-block invisible"></div>
+            
         </div>
     </header>
     <main>
@@ -28,7 +35,7 @@
                 <div class="desc">
                     <h3>{{product.product_name}}</h3>
                     <p>{{product.price}} $</p>
-                    <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                    <button class="buy-btn" @click="addToCart(item)">Купить</button>
                 </div>
             </div>
         </div>
