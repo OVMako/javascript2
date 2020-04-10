@@ -1,0 +1,48 @@
+{
+    "amount": 46600,
+    "countGoods": 2,
+    "contents": [
+        {
+            "id_product": 124,
+            "product_name": "Standart",
+            "price": 100,
+            "quantity": 6,
+            "image": "/img/3.jpg"
+        },
+        {
+            "id_product": 457,
+            "product_name": "Premium",
+            "price": 200,
+            "quantity": 6,
+            "image": "/img/1.jpg"
+        },
+        {
+            "quantity": 7,
+            "id_product": 123,
+            "product_name": "Lux",
+            "price": 300,
+            "image": "/img/2.jpg"
+        },
+        {
+            "quantity": 1,
+            "id_product": 124,
+            "product_name": "Standart",
+            "price": 100,
+            "image": "/img/3.jpg"
+        },
+        {
+            "quantity": 1,
+            "id_product": 457,
+            "product_name": "Premium",
+            "price": 200,
+            "image": "/img/1.jpg"
+        },
+        {
+            "quantity": 1,
+            "id_product": 123,
+            "product_name": "Lux",
+            "price": 300,
+            "image": "/img/2.jpg"
+        }
+    ]
+}
